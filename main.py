@@ -70,7 +70,7 @@ def delete_processed_files():
 def find_words():
     filenames = [x for x in os.listdir('audio/') if valid_filename(x)]
     for filename in filenames:
-        part = recognize_audio(f'audio/{filename}', engine)
+        part = recognize_audio(f'audio/{filename}', engine, config['language'])
         if not part:
             continue
         print_and_log(f'{channel}: {part}', logger.info)

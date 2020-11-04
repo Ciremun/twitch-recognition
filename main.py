@@ -18,11 +18,10 @@ if not any(engine == x for x in engines):
     os._exit(0)
 
 interrupt_signal = signal.SIGINT
-python = 'python3'
+python = sys.executable
 
 if sys.platform == 'win32':
     interrupt_signal = signal.CTRL_C_EVENT
-    python = 'python'
 
 Path("audio/").mkdir(exist_ok=True)
 
@@ -60,8 +59,9 @@ def find_words():
     filenames = [x for x in os.listdir('audio/') if x.lower().startswith(channel) and x.endswith('.wav') and not any(x == y for y in processed_filenames)]
     for filename in filenames:
         part = recognize_audio(f'audio/{filename}', engine)
-        logger.info(part)
-        print(part)
+        msg = f'{channel}: {part}'
+        logger.info(msg)
+        print(msg)
         for target, message in targets.items():
             if target in part:
                 send_message(message)

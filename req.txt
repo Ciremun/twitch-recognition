@@ -1,0 +1,4 @@
+youtube-dl>=2020.9.20
+SpeechRecognition>=3.8.1
+pocketsphinx
+pyaudio

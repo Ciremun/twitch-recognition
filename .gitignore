@@ -1,0 +1,6 @@
+__pycache__/
+.vscode/
+audio/
+log/
+__init__.py
+cookies.txt

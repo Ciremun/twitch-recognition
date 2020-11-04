@@ -1,10 +1,12 @@
 import subprocess
+import logging
 import signal
 import random
 import json
 import time
 import sys
 import os
+from logging.handlers import RotatingFileHandler
 from threading import Thread
 from typing import Callable
 from pathlib import Path
@@ -20,14 +22,21 @@ if not any(engine == x for x in engines):
     print(f'Unknown engine, available: {", ".join(engines)}')
     os._exit(0)
 
+
 interrupt_signal = signal.SIGINT
 
 if sys.platform == 'win32':
     interrupt_signal = signal.CTRL_C_EVENT
 
-Path("audio/").mkdir(exist_ok=True)
 config = json.load(open('config.json'))
 processed_filenames = []
+
+Path("audio/").mkdir(exist_ok=True)
+Path("log/").mkdir(exist_ok=True)
+
+fileHandler = RotatingFileHandler(f'log/{channel}.log', mode='a', maxBytes=5242880, backupCount=2)
+fileHandler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s [%(filename)s:%(lineno)d] %(message)s'))
+logger.addHandler(fileHandler)
 
 def valid_filename(x: str) -> bool:
     return all(x != y for y in processed_filenames) and x.lower().startswith(channel) and x.endswith('.wav')

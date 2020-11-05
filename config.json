@@ -1,6 +1,10 @@
 {
+    "channel": null,
+    "language": "en-US",
+    "segment_time": 4,
+    "engine": "google",
+    "engines": ["google", "sphinx"],
     "targets": {
         "unless": "😳"
-    },
-    "language": "en-US"
+    }
 }

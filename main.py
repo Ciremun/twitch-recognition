@@ -3,7 +3,7 @@ import logging
 import time
 import os
 from logging.handlers import RotatingFileHandler
-from typing import Callable, List, Tuple
+from typing import Callable, List
 from threading import Thread
 from pathlib import Path
 
@@ -18,7 +18,7 @@ Path("log/").mkdir(exist_ok=True)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-fileHandler = RotatingFileHandler(f'log/{Config.channel}.log', mode='a', maxBytes=5242880, backupCount=2)
+fileHandler = RotatingFileHandler(f'log/{Config.channel}.log', mode='a', maxBytes=5242880, backupCount=2, encoding='utf-8')
 fileHandler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s [%(filename)s:%(lineno)d] %(message)s'))
 logger.addHandler(fileHandler)
 

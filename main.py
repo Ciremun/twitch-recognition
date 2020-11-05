@@ -45,10 +45,8 @@ def delete_audio_files(files_to_delete: List[str]):
 
 
 def find_targets() -> List[str]:
-    filenames = [x for x in os.listdir('audio/') if valid_filename(x)]
-    processed_files = []
-    for filename in filenames[:-1]:
-        processed_files.append(filename)
+    filenames = [x for x in os.listdir('audio/') if valid_filename(x)][:-1]
+    for filename in filenames:
         part = recognize_audio(f'audio/{filename}', Config.engine, Config.language)
         if not part:
             continue
@@ -56,7 +54,7 @@ def find_targets() -> List[str]:
         for target, message in Config.targets.items():
             if target in part.lower():
                 send_message(message)
-    return processed_files
+    return filenames
 
 
 def words():
@@ -71,7 +69,7 @@ def main():
     command = f'youtube-dl -x --get-url https://twitch.tv/{Config.channel} --cookies cookies.txt'
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     url = process.communicate()[0].decode().rstrip()
-    command = f'ffmpeg -i {url} -v quiet -f segment -segment_time {Config.segment_time} -segment_format wav audio/{Config.channel}%05d.wav'
+    command = f'ffmpeg -i {url} -v quiet -f segment -segment_time {Config.segment_time} -segment_format wav -strftime 1 audio/{Config.channel}%Y%m%d%H%M%S.wav'
     process = subprocess.Popen(command.split())
     words_thread = Thread(target=words)
     words_thread.daemon = True

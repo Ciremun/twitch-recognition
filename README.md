@@ -1,6 +1,6 @@
 # twitch-recognition
-youtube-dl + SpeechRecognition
-get twitch audio stream -> split into segments -> log speech recognition result
+youtube-dl + SpeechRecognition  
+get twitch audio stream -> split into segments -> log speech recognition result  
 
 ## Usage
 

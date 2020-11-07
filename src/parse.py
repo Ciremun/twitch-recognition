@@ -5,9 +5,9 @@ from typing import Tuple
 from .config import Config
 
 parser = ArgumentParser()
-parser.add_argument('-c', '--channel', type=str, help='Twitch.tv username', nargs=1)
+parser.add_argument('-c', '--channel', type=str, help='twitch.tv username', nargs=1)
 parser.add_argument('-e', '--engine', type=str, help='Google or Sphinx', nargs=1)
-parser.add_argument('-l', '--language', type=str, help='Language code', nargs=1)
+parser.add_argument('-l', '--language', type=str, help='language code', nargs=1)
 parser.add_argument('-st', '--segment-time', type=int, help='ffmpeg segment_time in seconds', nargs=1)
 parsed_args = parser.parse_args()
 

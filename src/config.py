@@ -5,7 +5,7 @@ class Config:
     language = None
     segment_time = None
     engine = None
-    engines = []
+    engines = ['google', 'sphinx']
     targets = None
 
 config = json.load(open('config.json'))
